@@ -16,22 +16,25 @@ const ContactList = ({ contacts, filter, onDeleteContact }) => {
   }
 
   return (
-    <TransitionGroup component="ul" className={styles}>
-      {list.map((contact) => (
-        <CSSTransition key={contact.id} timeout={250} classNames={animation}>
-          <li className={styles.item}>
-            {contact.name}: {contact.number}
-            <button
-              className={styles.deleteBtn}
-              type="button"
-              onClick={() => onDeleteContact(contact.id)}
-            >
-              Delete
-            </button>
-          </li>
-        </CSSTransition>
-      ))}
-    </TransitionGroup>
+    <div className={styles.divContactList}>
+      <h2 className={styles.title}>Contact list</h2>
+      <TransitionGroup component="ul" className={styles}>
+        {list.map((contact) => (
+          <CSSTransition key={contact.id} timeout={250} classNames={animation}>
+            <li className={styles.item}>
+              {contact.name}: {contact.number}
+              <button
+                className={styles.deleteBtn}
+                type="button"
+                onClick={() => onDeleteContact(contact.id)}
+              >
+                Delete
+              </button>
+            </li>
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
+    </div>
   );
 };
 
@@ -44,17 +47,6 @@ ContactList.propTypes = {
     })
   ),
 };
-
-// const getVisibleContacts = (contacts, filter) => {
-//   return contacts.filter((contact) =>
-//     contact.name.toLowerCase().includes(filter.toLowerCase())
-//   );
-// };
-
-// const mapStateToProps = ({ phoneBook: { contacts, filter } }) => ({
-//   contacts: getVisibleContacts(contacts, filter),
-//   filter: filter,
-// });
 
 const mapStateToProps = (state) => ({
   contacts: state.phoneBook.contacts,

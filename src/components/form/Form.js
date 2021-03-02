@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
 import styles from "./Form.module.css";
 import shortid from "shortid";
 import { connect } from "react-redux";
@@ -14,6 +13,7 @@ class Form extends Component {
     name: "",
     number: "",
     alert: false,
+    alertField: false,
   };
 
   inputNameId = shortid.generate();
@@ -41,7 +41,6 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
     this.includeContact(this.state.name);
     this.setState({ name: "" });
     this.setState({ number: "" });
@@ -102,11 +101,6 @@ class Form extends Component {
     );
   }
 }
-
-// Form.propTypes = {
-//   name: PropTypes.string,
-//   number: PropTypes.number,
-// };
 
 const mapStateToProps = (state) => ({
   contacts: state.phoneBook.contacts,
